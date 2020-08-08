@@ -1,0 +1,9 @@
+<li class="party-member flexrow" data-entity-id="{{partyMember._id}}" draggable="true">
+    {{#if deleteButton }}
+        <div class="button">
+            <a class="item-control item-delete" title="Remove from party"><i class="fas fa-trash"></i></a>
+        </div>
+    {{/if}}
+    <img class="party-member-avatar" title="{{partyMember.name}}" src="{{partyMember.img}}">
+    {{ enrich (strconcat "@Actor[" partyMember.name "]") }}
+</li>

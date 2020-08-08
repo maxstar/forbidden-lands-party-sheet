@@ -1,0 +1,22 @@
+
+<div class="travel-action travel-action-{{action.key}}" data-travel-action="{{action.key}}">
+    <div class="travel-action-header">
+        {{#if action.journalEntryName}}
+            {{ enrich (strconcat "@JournalEntry[" (capitalize action.journalEntryName) "]{" (localize action.name) "}") }}
+        {{else}}
+            {{ localize action.name }}
+        {{/if}}
+    </div>
+    <div class="travel-rolls">
+        {{#each action.buttons as |button|}}
+            <button class="travel-roll {{button.class}}">{{localize button.name}}</button>
+        {{/each}}
+    </div>
+    <div>
+        <ol>
+            {{#each assignedCharacters as |partyMember|}}
+                {{> systems/forbidden-lands/model/tab/party/party-member.html partyMember=partyMember}}
+            {{/each}}
+        </ol>
+    </div>
+</div>
