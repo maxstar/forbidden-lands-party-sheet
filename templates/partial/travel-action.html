@@ -2,7 +2,7 @@
 <div class="travel-action travel-action-{{action.key}}" data-travel-action="{{action.key}}">
     <div class="travel-action-header">
         {{#if action.journalEntryName}}
-            {{ enrich (strconcat "@JournalEntry[" (capitalize action.journalEntryName) "]{" (localize action.name) "}") }}
+            {{ flps_enrich (flps_strconcat "@JournalEntry[" (flps_capitalize action.journalEntryName) "]{" (localize action.name) "}") }}
         {{else}}
             {{ localize action.name }}
         {{/if}}

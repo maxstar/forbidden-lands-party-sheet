@@ -5,5 +5,5 @@
         </div>
     {{/if}}
     <img class="party-member-avatar" title="{{partyMember.name}}" src="{{partyMember.img}}">
-    {{ enrich (strconcat "@Actor[" partyMember.name "]") }}
+    {{ flps_enrich (flps_strconcat "@Actor[" partyMember.name "]") }}
 </li>
