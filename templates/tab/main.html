@@ -6,7 +6,7 @@
         <div class="flex row margin align-end space-around grow">
             <div class="flex column">
                 <div class="name">
-                    <b>{{localize "PARTY.NAME"}}</b>
+                    <b>{{localize "FLPS.PARTY.NAME"}}</b>
                     <input name="name" type="text" value="{{actor.name}}"/>
                 </div>
             </div>
@@ -18,7 +18,7 @@
         <div>
             <ol>
             {{#each partyMembers as |partyMember|}}
-                {{> systems/forbidden-lands/model/tab/party/party-member.html partyMember=partyMember deleteButton=true}}
+                {{> modules/forbidden-lands-party-sheet/templates/partial/party-member.html partyMember=partyMember deleteButton=true}}
             {{/each}}
         </ol>
         </div>

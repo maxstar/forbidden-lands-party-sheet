@@ -2,6 +2,9 @@
     "FLPS.SETTINGS.ALLOW_PUSH": "Allow Pushing Travel Rolls",
     "FLPS.SETTINGS.ALLOW_PUSH_HINT": "Some GMs disallow pushing travel rolls to limit willpower accumulation.",
     
+    "FLPS.TAB.MAIN": "MAIN",
+    "FLPS.TAB.TRAVEL": "TRAVEL",
+
     "FLPS.PARTY.NAME": "Party Name",
     "FLPS.PARTY.MEMBERS": "Party Members",
 
