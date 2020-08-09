@@ -1,6 +1,6 @@
 {
     "FLPS.SETTINGS.ALLOW_PUSH": "Allow Pushing Travel Rolls",
-    "FLPS.SETTINGS.ALLOW_PUSH_HINT": "Some GMs disallow pushing travel rolls to limit willpower accumulation.",
+    "FLPS.SETTINGS.ALLOW_PUSH_HINT": "Some GMs disallow pushing travel rolls to limit willpower accumulation. If this setting is off, then 'Push' button will not be displayed in the party sheet header.",
     
     "FLPS.TAB.MAIN": "MAIN",
     "FLPS.TAB.TRAVEL": "TRAVEL",

@@ -1,4 +1,5 @@
 import { TravelActionsConfig } from "./travel-actions.js";
+import { Helpers } from "./helpers.js";
 
 export class ForbiddenLandsPartySheet extends ActorSheet {
 
@@ -48,17 +49,39 @@ export class ForbiddenLandsPartySheet extends ActorSheet {
 
         html.find('.item-delete').click(this.handleRemoveMember.bind(this));
         html.find('.reset').click(ev => {
-           this.assignPartyMembersToAction(this.getPartyMembers(), 'other');
-           this.render(true);
+            this.assignPartyMembersToAction(this.getPartyMembers(), 'other');
+            this.render(true);
         });
 
         let button;
-        for(let key in TravelActionsConfig) {
+        for (let key in TravelActionsConfig) {
             for (let i = 0; i < TravelActionsConfig[key].buttons.length; i++) {
                 button = TravelActionsConfig[key].buttons[i];
                 html.find('.' + button.class).click(button.handler.bind(this, this));
             }
         }
+    }
+
+    _getHeaderButtons() {
+        let buttons = super._getHeaderButtons();
+
+        const allowTravelRollPush = game.settings.get("forbidden-lands-party-sheet", "allowTravelRollPush");
+        if (this.actor.owner && allowTravelRollPush) {
+            buttons = [
+                {
+                    label: "Push",
+                    class: "push-roll",
+                    icon: "fas fa-skull",
+                    onclick: (ev) => { 
+                        const diceRoller = Helpers.getCharacterDiceRoller(); 
+                        if (!diceRoller) return;
+                        diceRoller.push() 
+                    },
+                },
+            ].concat(buttons);
+        }
+
+        return buttons;
     }
 
     getPartyMembers() {
@@ -142,13 +165,13 @@ export class ForbiddenLandsPartySheet extends ActorSheet {
         let updateData = {}, updDataKey, partyMemberId;
         for (let i = 0; i < partyMembers.length; i++) {
             partyMemberId = typeof partyMembers[i] === 'object' ? partyMembers[i].data._id : partyMembers[i];
-    
+
             // remove party member from the current assignment
             let travelAction, actionParticipants;
             for (let key in this.actor.data.flags.travel) {
                 travelAction = this.actor.data.flags.travel[key];
                 if (travelAction.indexOf(partyMemberId) < 0) continue;
-    
+
                 updDataKey = 'flags.travel.' + key;
                 if (typeof travelAction === 'object') {
                     if (updateData[updDataKey] === undefined) {
@@ -162,7 +185,7 @@ export class ForbiddenLandsPartySheet extends ActorSheet {
                     updateData[updDataKey] = "";
                 }
             }
-    
+
             // add party member to a new assignment
             updDataKey = 'flags.travel.' + travelActionKey;
             if (typeof this.actor.data.flags.travel[travelActionKey] === 'object') {

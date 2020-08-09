@@ -1,4 +1,7 @@
+
 import { RollDialog } from "../../../systems/forbidden-lands/script/dialog/roll-dialog.js";
+import { InfoDialog } from "./dialog/info-dialog.js";
+import { Helpers } from "./helpers.js";
 
 /**
  * Roll skill check to perform a travel action
@@ -10,8 +13,12 @@ import { RollDialog } from "../../../systems/forbidden-lands/script/dialog/roll-
 function rollTravelAction(rollName, skillName, onAfterRoll) {
     if (game.user.character === null) return;
 
+    const diceRoller = Helpers.getCharacterDiceRoller();
+    if (diceRoller === null) return;
+
     const data = game.user.character.data.data;
     const skill = data.skill[skillName];
+
     RollDialog.prepareRollDialog(
         game.i18n.localize(rollName), 
         { name: game.i18n.localize(data.attribute[skill.attribute].label), value: data.attribute[skill.attribute].value},
@@ -20,7 +27,7 @@ function rollTravelAction(rollName, skillName, onAfterRoll) {
         "", 
         0, 
         0,
-        null,
+        diceRoller,
         onAfterRoll
     );
 }
