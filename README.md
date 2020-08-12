@@ -1,6 +1,6 @@
 # Forbidden Lands Party Sheet
 A module for Foundry VTT for Forbidden Lands system.
-Adds a party sheet where you can visually assign party members to various travel activities. Provides convenient access to to rolls required during travel.
+Adds a party sheet where you can visually assign party members to various travel activities. Provides convenient access to rolls required during travel.
 
 ## Install
 1. Go to the setup page and choose **Modules**.
@@ -9,7 +9,7 @@ Adds a party sheet where you can visually assign party members to various travel
 
 ## Preview
 ### Party Sheet
-*Screenshot goes here*
+![Party Sheet](https://github.com/maxstar/forbidden-lands-party-sheet/blob/master/assets/example.png?raw=true)
 
 ## Related Website
 - https://foundryvtt.com/
