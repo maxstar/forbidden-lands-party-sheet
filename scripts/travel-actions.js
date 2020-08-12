@@ -1,6 +1,5 @@
 
 import { RollDialog } from "../../../systems/forbidden-lands/script/dialog/roll-dialog.js";
-import { InfoDialog } from "./dialog/info-dialog.js";
 import { CharacterPickerDialog } from "./dialog/character-picker-dialog.js";
 import { Helpers } from "./helpers.js";
 
@@ -43,12 +42,7 @@ function doRollTravelAction(character, rollName, skillName, onAfterRoll) {
  * @param  {Function} onAfterRoll          Callback that will be executed after roll is made
  */
 function rollTravelAction(assignedPartyMemberIds, rollName, skillName, doRoll, onAfterRoll) {
-    assignedPartyMemberIds = typeof assignedPartyMemberIds !== 'object' && assignedPartyMemberIds !== '' ? [assignedPartyMemberIds] : assignedPartyMemberIds;
-    let assignedPartyMembers = [];
-    for (let i = 0; i < assignedPartyMemberIds.length; i++) {
-        assignedPartyMembers.push(game.actors.get(assignedPartyMemberIds[i]));
-    }
-    assignedPartyMembers = assignedPartyMembers.filter((partyMember) => partyMember.owner);
+    let assignedPartyMembers = Helpers.getOwnedCharacters(assignedPartyMemberIds);
 
     if (assignedPartyMembers.length === 1) {
         doRoll(assignedPartyMembers[0], rollName, skillName, onAfterRoll);

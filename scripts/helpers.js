@@ -20,4 +20,15 @@ export class Helpers {
 
         return charSheet.diceRoller;
     }
+
+    static getOwnedCharacters(characterIds) {
+        characterIds = typeof characterIds !== 'object' && characterIds !== '' ? [characterIds] : characterIds;
+        let characters = [];
+        for (let i = 0; i < characterIds.length; i++) {
+            characters.push(game.actors.get(characterIds[i]));
+        }
+        characters = characters.filter((character) => character.owner);
+
+        return characters;
+    }
 }

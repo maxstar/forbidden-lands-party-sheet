@@ -1,5 +1,6 @@
 import { TravelActionsConfig } from "./travel-actions.js";
 import { Helpers } from "./helpers.js";
+import { CharacterPickerDialog } from "./dialog/character-picker-dialog.js";
 
 export class ForbiddenLandsPartySheet extends ActorSheet {
 
@@ -73,9 +74,24 @@ export class ForbiddenLandsPartySheet extends ActorSheet {
                     class: "push-roll",
                     icon: "fas fa-skull",
                     onclick: (ev) => { 
-                        const diceRoller = Helpers.getCharacterDiceRoller(); 
-                        if (!diceRoller) return;
-                        diceRoller.push() 
+                        let ownedPartyMembers = Helpers.getOwnedCharacters(this.actor.data.flags.partyMembers);
+                        let diceRoller;
+
+                        if (ownedPartyMembers.length === 1) {
+                            diceRoller = Helpers.getCharacterDiceRoller(ownedPartyMembers[0]); 
+                            if (!diceRoller) return;
+                            diceRoller.push();
+                        } else if (ownedPartyMembers.length > 1) {
+                            CharacterPickerDialog.show(
+                                "Who Pushes?", 
+                                ownedPartyMembers, 
+                                function (entityId) {
+                                    diceRoller = Helpers.getCharacterDiceRoller(game.actors.get(entityId)); 
+                                    if (!diceRoller) return;
+                                    diceRoller.push();
+                                }
+                            );
+                        }
                     },
                 },
             ].concat(buttons);
