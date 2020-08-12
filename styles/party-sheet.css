@@ -43,6 +43,19 @@
     background-color: inherit;
 }
 
+.party-member .plain-name {
+    margin-right: 4px;
+    margin-right: 4px;
+    line-height: 44px;
+
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+
+    border: 0px;
+    background-color: inherit;
+}
+
 .party-member-list {
     height: 100%;
 }

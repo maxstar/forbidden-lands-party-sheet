@@ -2,13 +2,14 @@ import { ForbiddenLandsCharacterSheet } from "../../../systems/forbidden-lands/s
 import { InfoDialog } from "./dialog/info-dialog.js";
 
 export class Helpers {
-    static getCharacterDiceRoller(character) {        
-        if ((!character || !character.apps) && game.user.character === null) return;
+    static getCharacterDiceRoller(character) {
+        character = character instanceof Actor ? character : game.user.character;
+        if (!character) return;
 
         let charSheet;
-        for (let key in game.user.character.apps) {
-            if (game.user.character.apps[key] instanceof ForbiddenLandsCharacterSheet) {
-                charSheet = game.user.character.apps[key];
+        for (let key in character.apps) {
+            if (character.apps[key] instanceof ForbiddenLandsCharacterSheet) {
+                charSheet = character.apps[key];
                 break;
             }
         }

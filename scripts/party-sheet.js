@@ -138,7 +138,10 @@ export class ForbiddenLandsPartySheet extends ActorSheet {
     async _onDrop(event) {
         super._onDrop(event);
 
-        let draggedItem = JSON.parse(event.dataTransfer.getData('text/plain'));
+        const json = event.dataTransfer.getData('text/plain');
+        if (!json) return;
+
+        let draggedItem = JSON.parse(json);
         if (draggedItem.type !== 'Actor') return;
 
         const actor = game.actors.get(draggedItem.id);

@@ -5,5 +5,9 @@
         </div>
     {{/if}}
     <img class="party-member-avatar" title="{{partyMember.name}}" src="{{partyMember.img}}">
-    {{ flps_enrich (flps_strconcat "@Actor[" partyMember.name "]") }}
+    {{#if noCharSheetLink }}
+        <span class="plain-name">{{partyMember.name}}</span>
+    {{else}}
+        {{ flps_enrich (flps_strconcat "@Actor[" partyMember.name "]") }}
+    {{/if}}
 </li>
