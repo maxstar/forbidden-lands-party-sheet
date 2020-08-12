@@ -42,7 +42,7 @@ function doRollTravelAction(character, rollName, skillName, onAfterRoll) {
  * @param  {string}   skillName            Unlocalized label
  * @param  {Function} onAfterRoll          Callback that will be executed after roll is made
  */
-function rollTravelAction(assignedPartyMemberIds, rollName, skillName, onAfterRoll) {
+function rollTravelAction(assignedPartyMemberIds, rollName, skillName, doRoll, onAfterRoll) {
     assignedPartyMemberIds = typeof assignedPartyMemberIds !== 'object' && assignedPartyMemberIds !== '' ? [assignedPartyMemberIds] : assignedPartyMemberIds;
     let assignedPartyMembers = [];
     for (let i = 0; i < assignedPartyMemberIds.length; i++) {
@@ -51,13 +51,13 @@ function rollTravelAction(assignedPartyMemberIds, rollName, skillName, onAfterRo
     assignedPartyMembers = assignedPartyMembers.filter((partyMember) => partyMember.owner);
 
     if (assignedPartyMembers.length === 1) {
-        doRollTravelAction(assignedPartyMembers[0], rollName, skillName, onAfterRoll);
+        doRoll(assignedPartyMembers[0], rollName, skillName, onAfterRoll);
     } else if (assignedPartyMembers.length > 1) {
         CharacterPickerDialog.show(
-            game.i18n.localize(rollName) + " | Who Rolls?", 
+            "Who Rolls?" + game.i18n.localize(rollName), 
             assignedPartyMembers, 
             function (entityId) {
-                doRollTravelAction(game.actors.get(entityId), rollName, skillName, onAfterRoll);
+                doRoll(game.actors.get(entityId), rollName, skillName, onAfterRoll);
             }
         );
     }
@@ -73,14 +73,14 @@ export let TravelActionsConfig = {
                 name: "FLPS.TRAVEL_ROLL.FORCED_MARCH",
                 class: "travel-forced-march",
                 handler: function (party, event) {
-                    rollTravelAction(party.actor.data.flags.travel.hike, "FLPS.TRAVEL_ROLL.FORCED_MARCH", 'endurance');
+                    rollTravelAction(party.actor.data.flags.travel.hike, "FLPS.TRAVEL_ROLL.FORCED_MARCH", 'endurance', doRollTravelAction);
                 },
             },
             {
                 name: "FLPS.TRAVEL_ROLL.HIKE_IN_DARKNESS",
                 class: "travel-hike-in-darkness",
                 handler: function (party, event) {
-                    rollTravelAction(party.actor.data.flags.travel.hike, "FLPS.TRAVEL_ROLL.HIKE_IN_DARKNESS", 'scouting');
+                    rollTravelAction(party.actor.data.flags.travel.hike, "FLPS.TRAVEL_ROLL.HIKE_IN_DARKNESS", 'scouting', doRollTravelAction);
                 },
             },
         ],
@@ -94,7 +94,7 @@ export let TravelActionsConfig = {
                 name: "FLPS.TRAVEL_ROLL.NAVIGATE",
                 class: "travel-navigate",
                 handler: function (party, event) {
-                    rollTravelAction(party.actor.data.flags.travel.lead, "FLPS.TRAVEL_ROLL.NAVIGATE", 'survival');
+                    rollTravelAction(party.actor.data.flags.travel.lead, "FLPS.TRAVEL_ROLL.NAVIGATE", 'survival', doRollTravelAction);
                 },
             },
         ],
@@ -108,7 +108,7 @@ export let TravelActionsConfig = {
                 name: "FLPS.TRAVEL_ROLL.KEEP_WATCH",
                 class: "travel-keep-watch",
                 handler: function (party, event) {
-                    rollTravelAction(party.actor.data.flags.travel.watch, "FLPS.TRAVEL_ROLL.KEEP_WATCH", 'scouting');
+                    rollTravelAction(party.actor.data.flags.travel.watch, "FLPS.TRAVEL_ROLL.KEEP_WATCH", 'scouting', doRollTravelAction);
                 },
             },
         ],
@@ -134,7 +134,7 @@ export let TravelActionsConfig = {
                 name: "FLPS.TRAVEL_ROLL.FIND_FOOD",
                 class: "travel-find-food",
                 handler: function (party, event) {
-                    rollTravelAction(party.actor.data.flags.travel.forage, "FLPS.TRAVEL_ROLL.FIND_FOOD", 'survival');
+                    rollTravelAction(party.actor.data.flags.travel.forage, "FLPS.TRAVEL_ROLL.FIND_FOOD", 'survival', doRollTravelAction);
                 },
             },
         ],
@@ -152,6 +152,7 @@ export let TravelActionsConfig = {
                         party.actor.data.flags.travel.hunt,
                         "FLPS.TRAVEL_ROLL.FIND_PREY", 
                         'survival',
+                        doRollTravelAction,
                         function (diceRoller) { // onAfterRoll
                             const isSuccess = diceRoller.countSword() > 0;
                             if (isSuccess) {
@@ -174,20 +175,32 @@ export let TravelActionsConfig = {
                 name: "FLPS.TRAVEL_ROLL.KILL_PREY",
                 class: "travel-kill-prey",
                 handler: function (party, event) {
-                    // handleGM(party.actor.data.flags.travel.hunt, 'FLPS.TRAVEL.HUNT', 'FLPS.TRAVEL_ROLL.KILL_PREY');
+                    rollTravelAction(
+                        party.actor.data.flags.travel.hunt, 
+                        "FLPS.TRAVEL_ROLL.KILL_PREY", 
+                        'survival', 
+                        function(character, rollName, skillName, onAfterRoll) {
+                            if (!character && game.user.character === null) return;
 
-                    if (game.user.character === null) return;
+                            character = character || game.user.character;
+                            const diceRoller = Helpers.getCharacterDiceRoller(character);
+                            if (diceRoller === null) return;
 
-                    const data = game.user.character.data.data;
-                    const skill = data.skill.marksmanship;
-                    RollDialog.prepareRollDialog(
-                        game.i18n.localize("FLPS.TRAVEL_ROLL.KILL_PREY"), 
-                        data.attribute[skill.attribute].value,
-                        skill.value, 
-                        0, 
-                        "", 
-                        0, 
-                        0
+                            const data = character.data.data;
+                            const skill = data.skill.marksmanship;
+
+                            RollDialog.prepareRollDialog(
+                                game.i18n.localize(rollName), 
+                                data.attribute[skill.attribute].value,
+                                skill.value, 
+                                0, 
+                                "", 
+                                0, 
+                                0,
+                                diceRoller,
+                                onAfterRoll
+                            );
+                        }
                     );
                 },
             },
@@ -201,7 +214,7 @@ export let TravelActionsConfig = {
                 name: "FLPS.TRAVEL_ROLL.CATCH_FISH",
                 class: "travel-catch-fish",
                 handler: function (party, event) {
-                    rollTravelAction(party.actor.data.flags.travel.fish, "FLPS.TRAVEL_ROLL.CATCH_FISH", 'survival');
+                    rollTravelAction(party.actor.data.flags.travel.fish, "FLPS.TRAVEL_ROLL.CATCH_FISH", 'survival', doRollTravelAction);
                 },
             },
         ],
@@ -215,7 +228,7 @@ export let TravelActionsConfig = {
                 name: "FLPS.TRAVEL_ROLL.MAKE_CAMP",
                 class: "travel-make-camp",
                 handler: function (party, event) {
-                    rollTravelAction(party.actor.data.flags.travel.camp, "FLPS.TRAVEL_ROLL.MAKE_CAMP", 'survival');
+                    rollTravelAction(party.actor.data.flags.travel.camp, "FLPS.TRAVEL_ROLL.MAKE_CAMP", 'survival', doRollTravelAction);
                 },
             },
         ],
