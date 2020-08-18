@@ -48,7 +48,7 @@ function rollTravelAction(assignedPartyMemberIds, rollName, skillName, doRoll, o
         doRoll(assignedPartyMembers[0], rollName, skillName, onAfterRoll);
     } else if (assignedPartyMembers.length > 1) {
         CharacterPickerDialog.show(
-            "Who Rolls?" + game.i18n.localize(rollName), 
+            "Who Rolls? " + game.i18n.localize(rollName), 
             assignedPartyMembers, 
             function (entityId) {
                 doRoll(game.actors.get(entityId), rollName, skillName, onAfterRoll);
@@ -117,7 +117,15 @@ export let TravelActionsConfig = {
         key: "sleep",
         journalEntryName: "Sleep",
         name: "FLPS.TRAVEL.SLEEP",
-        buttons: [],
+        buttons: [
+            {
+                name: "FLPS.TRAVEL_ROLL.FIND_GOOD_PLACE",
+                class: "travel-find-good-place",
+                handler: function (party, event) {
+                    rollTravelAction(party.actor.data.flags.travel.sleep, "FLPS.TRAVEL_ROLL.FIND_GOOD_PLACE", 'survival', doRollTravelAction);
+                },
+            },
+        ],
     },
     forage: {
         key: "forage",

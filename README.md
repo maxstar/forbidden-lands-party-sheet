@@ -13,10 +13,12 @@ This module comes with convenient rules references for travel activities and rol
 1. Create a new character and open its character sheet
 2. Go to sheet configuration ("Sheet" button in the sheet's title bar)
 3. In the first drop-down choose forbidden-lands.ForbiddenLandsPartySheet and press "Save Sheet Configuration" button
+4. GM must grant owner permission to all players for the party character
 5. Drag and drop player characters onto the party sheet
 6. Go to the "TRAVEL" tab and assign party members to various travel activities by drag&drop
 7. You can open journal entries with rules reference for a certain travel action by clicking on the travel activity name (GM must set proper permissions so that players are able to see these journal entries)
 8. There are buttons for all travel related rolls for your covenience
+9. Mishaps are NOT rolled automatically. GM has to manually make the roll.
 
 ## Preview
 ### Party Sheet
