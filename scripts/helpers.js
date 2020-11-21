@@ -1,4 +1,3 @@
-import { ForbiddenLandsCharacterSheet } from "../../../systems/forbidden-lands/script/sheet/character.js";
 import { InfoDialog } from "./dialog/info-dialog.js";
 
 export class Helpers {
@@ -6,9 +5,16 @@ export class Helpers {
         character = character instanceof Actor ? character : game.user.character;
         if (!character) return;
 
+        let charSheetClass = function(){};
+        for (let name in CONFIG.Actor.sheetClasses.character) {
+            if (name === 'forbidden-lands.ForbiddenLandsCharacterSheet') {
+                charSheetClass = CONFIG.Actor.sheetClasses.character[name].cls;
+                break;
+            }
+        }
         let charSheet;
         for (let key in character.apps) {
-            if (character.apps[key] instanceof ForbiddenLandsCharacterSheet) {
+            if (character.apps[key] instanceof charSheetClass) {
                 charSheet = character.apps[key];
                 break;
             }

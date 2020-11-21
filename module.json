@@ -3,9 +3,9 @@
   "title": "Forbidden Lands Party Sheet",
   "description": "Adds a party sheet where you can visually assign party members to various travel activities.",
   "author": "Maxter",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "minimumCoreVersion": "0.6.5",
-  "compatibleCoreVersion": "0.6.5",
+  "compatibleCoreVersion": "0.7.7",
   "systems": [
     "forbidden-lands"
   ],
@@ -40,5 +40,5 @@
   ],
   "url": "https://github.com/maxstar/forbidden-lands-party-sheet",
   "manifest": "https://raw.githubusercontent.com/maxstar/forbidden-lands-party-sheet/master/module.json",
-  "download": "https://github.com/maxstar/forbidden-lands-party-sheet/archive/1.0.2.zip"
+  "download": "https://github.com/maxstar/forbidden-lands-party-sheet/archive/1.0.3.zip"
 }
