@@ -22,6 +22,11 @@
     "FLPS.TRAVEL.OTHER": "Jiné",
     "FLPS.TRAVEL.RESET": "RESETOVAT",
 
+    "FLPS.UI.WHO_ROLLS": "Kdo háže?",
+    "FLPS.UI.WHO_PUSHES": "Kdo zkouší štěstí?",
+    "FLPS.UI.ATTENTION": "Pozor",
+    "FLPS.UI.ERROR.OPEN_SHEET": "Před tím než provedete hod na cestování, otevřete prosím nejméně jednou list vaší postavy.",
+
     "FLPS.TRAVEL_ROLL.FORCED_MARCH": "Nucený pochod (VÝDRŽ)",
     "FLPS.TRAVEL_ROLL.HIKE_IN_DARKNESS": "Pochod ve tmě (OSTRAŽITOST)",
     "FLPS.TRAVEL_ROLL.NAVIGATE": "Určování směru (PŘEŽITÍ)",
