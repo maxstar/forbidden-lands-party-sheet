@@ -7,6 +7,8 @@
 
     "FLPS.PARTY.NAME": "Party Name",
     "FLPS.PARTY.MEMBERS": "Party Members",
+    "FLPS.PARTY.HINT_ADD": "Drag & drop characters here to add them to the party.",
+    "FLPS.PARTY.HINT_ASSIGN": "Drag & drop characters to assign them to the desired travel activities.",
 
     "FLPS.TRAVEL.HIKE": "Hike",
     "FLPS.TRAVEL.LEAD": "Lead the Way",
@@ -18,6 +20,12 @@
     "FLPS.TRAVEL.FISH": "Fish",
     "FLPS.TRAVEL.CAMP": "Make Camp",
     "FLPS.TRAVEL.OTHER": "Other",
+    "FLPS.TRAVEL.RESET": "RESET",
+
+    "FLPS.UI.WHO_ROLLS": "Who rolls?",
+    "FLPS.UI.WHO_PUSHES": "Who pushes?",
+    "FLPS.UI.ATTENTION": "Attention",
+    "FLPS.UI.ERROR.OPEN_SHEET": "Please open your character sheet at least once before making travel rolls.",
 
     "FLPS.TRAVEL_ROLL.FORCED_MARCH": "Forced March (ENDURANCE)",
     "FLPS.TRAVEL_ROLL.HIKE_IN_DARKNESS": "Hike in Darkness (SCOUTING)",

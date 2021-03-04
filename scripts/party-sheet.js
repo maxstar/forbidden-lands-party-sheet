@@ -83,7 +83,7 @@ export class ForbiddenLandsPartySheet extends ActorSheet {
                             diceRoller.push();
                         } else if (ownedPartyMembers.length > 1) {
                             CharacterPickerDialog.show(
-                                "Who Pushes?", 
+                                game.i18n.localize('FLPS.UI.WHO_PUSHES'), 
                                 ownedPartyMembers, 
                                 function (entityId) {
                                     diceRoller = Helpers.getCharacterDiceRoller(game.actors.get(entityId)); 

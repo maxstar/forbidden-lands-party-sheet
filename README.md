@@ -24,6 +24,10 @@ This module comes with convenient rules references for travel activities and rol
 ### Party Sheet
 ![Party Sheet](https://github.com/maxstar/forbidden-lands-party-sheet/blob/master/assets/example.png?raw=true)
 
+## Translations
+- Czech by Mizy78
+- Russian by maxstar
+
 ## Related Websites
 - https://foundryvtt.com/
 - https://frialigan.se/en/store/?collection_id=84541866032

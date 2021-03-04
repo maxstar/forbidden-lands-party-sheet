@@ -48,7 +48,7 @@ function rollTravelAction(assignedPartyMemberIds, rollName, skillName, doRoll, o
         doRoll(assignedPartyMembers[0], rollName, skillName, onAfterRoll);
     } else if (assignedPartyMembers.length > 1) {
         CharacterPickerDialog.show(
-            "Who Rolls? " + game.i18n.localize(rollName), 
+            game.i18n.localize('FLPS.UI.WHO_ROLLS') + " " + game.i18n.localize(rollName), 
             assignedPartyMembers, 
             function (entityId) {
                 doRoll(game.actors.get(entityId), rollName, skillName, onAfterRoll);

@@ -20,7 +20,7 @@ export class Helpers {
             }
         }
         if (!charSheet) {
-            InfoDialog.show('Attention', 'Please open your character sheet at least once before making travel rolls.');
+            InfoDialog.show(game.i18n.localize('FLPS.UI.ATTENTION'), game.i18n.localize('FLPS.UI.ERROR.OPEN_SHEET'));
             return null;
         }
 
