@@ -27,6 +27,7 @@ This module comes with convenient rules references for travel activities and rol
 ## Translations
 - Czech by Mizy78
 - Russian by maxstar
+- Traditional Chinese by Rosataker
 
 ## Related Websites
 - https://foundryvtt.com/
