@@ -1,3 +1,6 @@
+# This module is DEPRECATED
+Party sheet is now integrated into the Forbidden Lands system and does not require a separate module.
+
 # Forbidden Lands Party Sheet
 A module for Foundry VTT for Forbidden Lands system.
 Adds a party sheet where you can visually assign party members to various travel activities. Provides convenient access to rolls required during travel.
